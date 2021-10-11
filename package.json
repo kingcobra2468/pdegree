@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Message-based RPIST node",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.17"
+  },
   "scripts": {
     "build": "rm -fr dist/*; webpack --config webpack.config.js",
-    "fix-format": "npx eslint --fix src/*",
+    "fix-format": "npx eslint --no-error-on-unmatched-pattern --fix src/*",
     "start": "node dist/rpistNode"
   },
   "repository": {
@@ -19,7 +22,9 @@
   },
   "homepage": "https://github.com/kingcobra2468/RPISTN#readme",
   "dependencies": {
+    "amqplib": "^0.8.0",
     "dotenv": "^10.0.0",
+    "protobufjs": "^6.11.2",
     "untildify": "^4.0.0",
     "webpack": "^5.30.0",
     "webpack-node-externals": "^2.5.2"

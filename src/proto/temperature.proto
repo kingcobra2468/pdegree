@@ -1,0 +1,13 @@
+package rpist.temperature;
+syntax = "proto3";
+
+message NewTemperatureMessage {
+    optional string node_id = 1;
+    optional sint32 temp_value = 2;
+    enum Scale {
+        CELCIUS = 1;
+        FAHRENHEIT = 2;
+        KELVIN = 3;
+    }
+    optional Scale scale = 3 [default = CELCIUS];
+}

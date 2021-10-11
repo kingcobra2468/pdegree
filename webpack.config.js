@@ -7,13 +7,11 @@ module.exports = {
   mode: 'development',
   target: 'node',
   externals: [nodeExternals()],
-  entry: './src/app.js',
+  entry: './src/index.js',
   resolve: {
     modules: ['src', path.resolve(__dirname, 'node_modules'), 'node_modules'],
     alias: {
-      '@api': path.resolve(__dirname, 'src', 'api'),
       '@sensors': path.resolve(__dirname, 'src', 'sensors'),
-      '@utils': path.resolve(__dirname, 'src', 'utils'),
       '@': path.resolve(__dirname, 'src'),
     },
     extensions: ['*', '.js'],
@@ -31,7 +29,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv({path: './src/.env' }),
+    new Dotenv({ path: './src/.env' }),
     new ESLintPlugin({ fix: true, extensions: ['js'] }),
   ],
 };

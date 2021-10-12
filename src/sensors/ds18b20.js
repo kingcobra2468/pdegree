@@ -1,16 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+const BaseSensor = require('./baseSensor');
 
 /**
  * Driver for reading temperature data from ds18b20
  * temperature sensor.
  */
-class Ds18b20 {
+class Ds18b20 extends BaseSensor {
   /**
    * Initializes instance of sensor reader.
    * @param {string} [devicePath='/sys/bus/w1/devices/'] Path to device
    */
   constructor(devicePath = '/sys/bus/w1/devices/') {
+    super();
     this.devicePath = devicePath;
     this.findSensorId();
   }
@@ -56,42 +58,6 @@ class Ds18b20 {
       .catch((_) => {
         throw new Error('Unable to parse temperature stream.');
       });
-  }
-
-  /**
-   * Retrieves the temperature(C) value from the sensor.
-   * @async
-   * @throws Exception if there is a failure to read temperature data
-   * @returns {int} temperature
-   */
-  async getCelsius() {
-    const temp = await this.getRawTemp();
-
-    return temp;
-  }
-
-  /**
-   * Retrieves the temperature(F) value from the sensor.
-   * @async
-   * @throws Exception if there is a failure to read temperature data
-   * @returns {int} temperature
-   */
-  async getFahrenheit() {
-    const temp = await this.getRawTemp();
-
-    return (temp * (9 / 5)) + 32;
-  }
-
-  /**
-   * Retrieves the temperature(K) value from the sensor.
-   * @async
-   * @throws Exception if there is a failure to read temperature data
-   * @returns {int} temperature
-   */
-  async getKelvin() {
-    const temp = await this.getRawTemp();
-
-    return temp + 273.15;
   }
 }
 

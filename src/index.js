@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { EventEmitter } = require('events');
 const amqplib = require('amqplib/callback_api');
 const protobuf = require('protobufjs');
@@ -10,10 +11,9 @@ process.on('SIGINT', () => {
 });
 
 amqplib.connect('amqp://10.0.1.10', async (err, conn) => {
-  if (err != null) process.exit(1);
-  exitEmitter.on('exit', () => conn.close());
-
+  if (err != null) throw err;
   const root = await protobuf.load('proto/temperature.proto');
 
+  exitEmitter.on('exit', () => conn.close());
   TemperaturePublisher(conn, root, exitEmitter);
 });

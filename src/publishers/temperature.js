@@ -11,9 +11,9 @@ const buildMessage = (ch, newTempMessage) => {
   ch.sendToQueue(queue, buffer);
 };
 
-// '@sensors/ds18b20'
 const publisher = (conn, root, emitter) => {
   conn.createChannel((err, ch) => {
+    if (err != null) throw err;
     ch.assertQueue(queue);
 
     const NewTemperatureMessage = root.lookupType('rpist.temperature.NewTemperatureMessage');

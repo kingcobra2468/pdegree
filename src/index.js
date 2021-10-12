@@ -6,6 +6,9 @@ const TemperaturePublisher = require('./publishers/temperature');
 
 const exitEmitter = new EventEmitter();
 
+/**
+ * Signal listner for Control + C events.
+ */
 process.on('SIGINT', () => {
   exitEmitter.emit('exit');
 });

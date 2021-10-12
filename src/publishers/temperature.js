@@ -1,16 +1,27 @@
-// const ds18b20 = require('../sensors/ds18b20')
-//  .findSensorId();
+const sensor = require('../sensors/sensorFactory')
+  .create(process.env.SENSOR);
 
-const id = 'living_room';
-const queue = 'temp';
+const id = process.env.NODE_ID;
+const queue = process.env.QUEUE;
 
-const buildMessage = (ch, newTempMessage) => {
-  const message = newTempMessage.create({ nodeId: id, tempValue: 50 });
+/**
+ * Serializes a temperature message and sends it to the queue.
+ * @param {*} ch Rabbitmq channel that contains the queue
+ * @param {*} newTempMessage Protobuf reference object used for protobuf serialization
+ */
+const buildMessage = async (ch, newTempMessage) => {
+  const message = newTempMessage.create({ nodeId: id, tempValue: await sensor.getCelsius() });
   const buffer = newTempMessage.encode(message).finish();
 
   ch.sendToQueue(queue, buffer);
 };
 
+/**
+ * Temperature Publisher for pushing new temperature readings into the queue.
+ * @param {*} conn Active Rabbitmq connection over AMQP
+ * @param {*} root Object behind the root protobuf scope
+ * @param {*} emitter Listener for process lifecycle events
+ */
 const publisher = (conn, root, emitter) => {
   conn.createChannel((err, ch) => {
     if (err != null) throw err;
@@ -18,7 +29,7 @@ const publisher = (conn, root, emitter) => {
 
     const NewTemperatureMessage = root.lookupType('rpist.temperature.NewTemperatureMessage');
 
-    const cycle = setInterval(() => buildMessage(ch, NewTemperatureMessage), 5000);
+    const cycle = setInterval(async () => buildMessage(ch, NewTemperatureMessage), 5000);
     emitter.on('exit', () => {
       clearInterval(cycle);
     });

@@ -19,7 +19,7 @@ module.exports = {
     extensions: ['*', '.js'],
   },
   output: {
-    filename: 'rpistn.js',
+    filename: 'srpist.js',
     path: path.join(__dirname, '/dist'),
   },
   module: {

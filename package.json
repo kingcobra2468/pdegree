@@ -1,5 +1,5 @@
 {
-  "name": "rpistn",
+  "name": "pdegree",
   "version": "1.0.0",
   "description": "Message-based RPIST node",
   "main": "index.js",
@@ -9,18 +9,18 @@
   "scripts": {
     "build": "rm -fr dist/*; webpack --config webpack.config.js",
     "fix-format": "npx eslint --no-error-on-unmatched-pattern --fix src/*",
-    "start": "cd dist && node rpistn"
+    "start": "cd dist && node pdegree"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kingcobra2468/RPISTN.git"
+    "url": "git+https://github.com/kingcobra2468/pdegree.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kingcobra2468/RPISTN/issues"
+    "url": "https://github.com/kingcobra2468/pdegree/issues"
   },
-  "homepage": "https://github.com/kingcobra2468/RPISTN#readme",
+  "homepage": "https://github.com/kingcobra2468/pdegree#readme",
   "dependencies": {
     "amqplib": "^0.8.0",
     "dotenv": "^10.0.0",

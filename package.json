@@ -1,30 +1,36 @@
 {
-  "name": "rpistn",
+  "name": "pdegree",
   "version": "1.0.0",
   "description": "Message-based RPIST node",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.17"
+  },
   "scripts": {
     "build": "rm -fr dist/*; webpack --config webpack.config.js",
-    "fix-format": "npx eslint --fix src/*",
-    "start": "node dist/rpistNode"
+    "fix-format": "npx eslint --no-error-on-unmatched-pattern --fix src/*",
+    "start": "cd dist && node pdegree"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kingcobra2468/RPISTN.git"
+    "url": "git+https://github.com/kingcobra2468/pdegree.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kingcobra2468/RPISTN/issues"
+    "url": "https://github.com/kingcobra2468/pdegree/issues"
   },
-  "homepage": "https://github.com/kingcobra2468/RPISTN#readme",
+  "homepage": "https://github.com/kingcobra2468/pdegree#readme",
   "dependencies": {
+    "amqplib": "^0.8.0",
     "dotenv": "^10.0.0",
+    "protobufjs": "^6.11.2",
     "untildify": "^4.0.0",
     "webpack": "^5.30.0",
     "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
     "dotenv-webpack": "^7.0.3",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",

@@ -1,0 +1,2 @@
+**/*.proto
+src/server.js

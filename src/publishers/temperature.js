@@ -1,4 +1,4 @@
-const sensor = require('@sensors/sensorFactory')
+const sensor = require('../sensors/sensorFactory')
   .create(process.env.SENSOR);
 
 const id = process.env.NODE_ID;
@@ -10,9 +10,7 @@ const queue = process.env.QUEUE;
  * @param {*} newTempMessage Protobuf reference object used for protobuf serialization
  */
 const buildMessage = async (ch, newTempMessage) => {
-  const message = newTempMessage.create(
-    { nodeId: id, tempValue: await sensor.getCelsius(), scale: 0 },
-  );
+  const message = newTempMessage.create({ nodeId: id, tempValue: await sensor.getCelsius() });
   const buffer = newTempMessage.encode(message).finish();
 
   ch.sendToQueue(queue, buffer);

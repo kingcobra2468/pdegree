@@ -1,3 +1,2 @@
-{
-   "ignorePatterns": ["**/*.proto"] 
-}
+**/*.proto
+**/*server.js

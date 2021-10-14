@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rm -fr dist/*; webpack --config webpack.config.js",
     "fix-format": "npx eslint --no-error-on-unmatched-pattern --fix src/*",
-    "start": "node dist/rpistNode"
+    "start": "cd dist && node rpistn"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "webpack-node-externals": "^2.5.2"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^9.0.1",
     "dotenv-webpack": "^7.0.3",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",

@@ -20,7 +20,7 @@ process.on('SIGINT', () => {
   exitEmitter.emit('exit');
 });
 
-amqplib.connect(`amqps://${process.env.RABBIT_MQ_ADDRESS}`, opts, async (err, conn) => {
+amqplib.connect(`amqps://${process.env.RABBITMQ_ADDRESS}:${process.env.RABBITMQ_PORT}`, opts, async (err, conn) => {
   if (err != null) throw err;
   const root = await protobuf.load('proto/temperature.proto');
 
